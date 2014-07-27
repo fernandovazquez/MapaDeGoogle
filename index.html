@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Tran
+sitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Georutas</title>
+<link rel="stylesheet" type="text/css" href="css/estilomapa.css"/>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+<script type="text/javascript" src="gmaps.js"></script>
+
+<script type="text/javascript" src="zepto.min.js"></script>
+
+<script type="text/javascript">
+
+var map, lat, long;
+
+$(function(){
+	
+	function enlazarMarca(e){
+		map.drawRoute({
+			origin: [lat, long],
+			//Destino de las coordenadas del click o tap actual
+			destination:[e.latLng.lat(), e.latLng.lng()],
+			travelMode: 'driving',
+			strokeColor: '#0000FF',
+			strokeOpacity: 0.8,
+			strokeWeight: 3
+			});
+			//Se guardan las coordenadas para la marca siguiente
+			lat = e.latLng.lat();
+			long = e.latLng.lng();
+			//Pone el marcador en el mapa 
+			map.addMarker({
+				lat:lat,
+				lng: long
+	});
+	}
+	
+	function geolocalizar(){
+		
+		GMaps.geolocate({
+			success: function(position){
+				lat = position.coords.latitude;
+				//guarda las coordenadas en lat y long
+				
+				long = position.coords.longitude;
+				
+				map = new GMaps({ //Muestra el mapa centrado en coords [lat, long]
+				el: '#map',
+				lat: lat,
+				lng: long,
+				click: enlazarMarca,
+				tap: enlazarMarca
+				});
+				
+				map.addMarker({ lat: lat,  lng: long});//Marcador en [lat, long]
+				
+				},
+			
+			error: function(error) {
+				
+				alert('Error:' + error.message); },
+				
+				not_supported: function(){ alert("No soporta geolocalizacion"); },
+				
+		});
+	};
+		geolocalizar();
+		
+});
+</script>
+			
+				
+				
+</head>
+<body>
+<h1>Ferny</h1>
+<br /><br /><br /><br /><br />
+<div id="map"></div>
+
+</body>
+</html>

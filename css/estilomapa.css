@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	font-family: 'Droid Sans', 'Helvetica', Arial, sans-serif;
+	<br>
+	
+}
+
+#latlng{
+	display: block;
+	margin: 0;
+	padding: 0;
+	position: absolute;/*Posición absolluta a navegador*/
+	
+	top: 0;/*Ajusta a borde de navegador*/
+	left: 0;
+	right: 0;
+	height: 50px;
+}
+
+#map{
+	display: block;
+	margin: 0;
+	padding: 0;
+	position:absolute;/*posicion absoluta a navegador */
+	top: 50px;/*50px debajo del borde de navegasdor*/
+	left: 0;/*Ajusta borde a navegador*/
+	right: 0;
+	bottom: 0;
+	background: rgba(0,255,0,0.5);}/*Verde si no hay mapa*/
+
+
+	
